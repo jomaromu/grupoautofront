@@ -21,9 +21,9 @@
             <div class="animate__animated" id="navMovil" #navMovil>
                 <div id="navegarMovil">
                     <ul>
-                        <li><i class="fas fa-home"></i> Inicio</li>
-                        <li><i class="fas fa-taxi"></i> Sobre nosotros</li>
-                        <li><i class="fas fa-chalkboard-teacher"> </i> Contáctenos</li>
+                        <li (click)="desplazarInicio(rowSlider)"><i class="fas fa-home"></i> Inicio</li>
+                        <li (click)="desplazarSobre(rowSobre)"><i class="fas fa-taxi"></i> Sobre nosotros</li>
+                        <li (click)="desplazarContacto(rowSlider, rowSobre)"><i class="fas fa-chalkboard-teacher"> </i> Contáctenos</li>
                     </ul>
                 </div>
             </div>

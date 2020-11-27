@@ -79,6 +79,9 @@
     i#logoInsta {
         right: 20px;
     }
+    div#sliders {
+        height: 350px;
+    }
 }
 
 @media (max-width: 576px) {
@@ -98,11 +101,24 @@
         font-size: 0.9em;
     }
     iframe {
-        width: 480px
+        width: 400px
     }
     footer>p {
         font-size: 0.8em !important;
     }
+    div#contTarjetas {
+        width: 400px;
+    }
+}
+
+@media (max-width: 435px) {
+    footer>p {
+        font-size: 0.7em !important;
+    }
+}
+
+#contenedorPrincipal {
+    margin: 0 auto;
 }
 
 #filaNav {
@@ -290,6 +306,10 @@ nav>ul>li:hover {
 
 
 /* tarjetas */
+
+#contTarjetas {
+    margin: 0 auto;
+}
 
 #contenedorTarjetas {
     margin: 10px auto;
