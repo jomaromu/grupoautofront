@@ -1,0 +1,152 @@
+<div class="container-fluid" id="contenedorPrincipal">
+    <!-- logo y navegacion -->
+    <div class="row" id="filaNav">
+        <div class="col-12" id="colNav">
+            <div id="logo">
+                <h6>Grupoautopanama.com</h6>
+            </div>
+            <nav id="menuPc">
+                <ul>
+                    <li (click)="desplazarInicio(rowSlider)"><i class="fas fa-home"></i> Inicio |</li>
+                    <li (click)="desplazarSobre(rowSobre)"><i class="fas fa-taxi"></i> Sobre nosotros |</li>
+                    <li (click)="desplazarContacto(rowSlider, rowSobre)"><i class="fas fa-chalkboard-teacher"></i> Contáctenos</li>
+                </ul>
+            </nav>
+            <!-- menu moviles -->
+            <div id="menuMoviles" (click)="toggleMenu($event)" #menuMoviles>
+                <div id="toggleMenu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+            <div class="animate__animated" id="navMovil" #navMovil>
+                <div id="navegarMovil">
+                    <ul>
+                        <li><i class="fas fa-home"></i> Inicio</li>
+                        <li><i class="fas fa-taxi"></i> Sobre nosotros</li>
+                        <li><i class="fas fa-chalkboard-teacher"> </i> Contáctenos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- slider -->
+    <div class="row" id="rowSlider" #rowSlider>
+        <div class="col-12">
+            <div id="sliders" #divSlider>
+                <div *ngFor="let slider of sliders">
+                    <img class="animate__animated animate__fadeIn" [src]="slider.rutaImg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- sobre nosotros -->
+    <div class="row" id="rowSobre" #rowSobre>
+        <div class="col-12" id="colSobre">
+            <div class="sm-col-12 md-col-6" id="colTxt">
+                <div id="txtSobre">
+                    <h5>Sobre nosotros</h5>
+                    <p>Somos una empresa panameña dedicada a la venta de autos usados de contado y también podemos financiar con el banco que el cliente elija o trabaje. También importamos autos de USA pero solo por pedidos y abono del 50% para iniciar el
+                        trámite.
+                    </p>
+                    <p>Si estas mal con la APC hay bancos que pueden financiar según tu score (puntaje de apc) haz tu consulta al whathsapp sin compromiso</p>
+                    <p>Ofrecemos 6 meses de garantía por la compra de su vehículo.</p>
+                </div>
+            </div>
+            <div class="md-col-6 lg-col-6 sm-col-12" id="colImg">
+                <div id="imgSobre">
+                    <img src="../../../assets/recortadas/about.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- tarjetas -->
+    <div class="container-fluid" id="contTarjetas" #contTarjetas style="background-color: rgb(209, 236, 241);">
+        <div class="container" id="contenedorTarjetas">
+            <div class="row">
+                <div class="col-12" id="col-cards">
+                    <div class="card-group">
+                        <div class="card sm-col-12 md-col-12">
+                            <img src="../../../assets/recortadas/mision.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Misión</h5>
+                                <p class="card-text">Nuestra misión es que usted quede satisfecho y feliz con la compra de su carro usado.</p>
+                            </div>
+                        </div>
+                        <div class="card sm-col-12 md-col-12">
+                            <img src="../../../assets/recortadas/vision.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Visión</h5>
+                                <p class="card-text">Posicionarnos como una de las empresas top en venta de autos en Panamá.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card sm-col-12 md-col-12">
+                            <img src="../../../assets/recortadas/lema.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Lema</h5>
+                                <p class="card-text">Si no lo tenemos lo conseguimos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- contacto -->
+    <div class="container" id="contenedorOficina">
+        <div class="row">
+            <div class="col-12">
+                <div id="datosOficina">
+
+                    <div>
+                        <i class="fas fa-phone"></i>
+                        <h4>Teléfono</h4>
+                        <p>205-9525</p>
+                    </div>
+
+                    <div>
+                        <i class="fas fa-building"></i>
+                        <h4>Oficina principal</h4>
+                        <p>Dorado City Center, nivel 3 local 303</p>
+                    </div>
+
+                    <div>
+                        <i class="fas fa-at"></i>
+                        <h4>Correo electrónico</h4>
+                        <p>grupoautospanama@gmail.com</p>
+                    </div>
+
+                </div>
+                <div id="ubicaOficina">
+                    <div>
+                        <form id="formulario" autocomplete="off" [formGroup]="forma" (ngSubmit)="enviarMensaje()">
+                            <h3>Envíenos un mensaje</h3>
+                            <span *ngIf="banderaNombre === false">* Mínimo 5 carácteres, máximo 100</span>
+                            <input class="controls" type="text" name="nombre" formControlName="nombre" id="nombre" placeholder="Nombre">
+                            <span *ngIf="banderaCorreo === false">* Correo inválido</span>
+                            <input class="controls" type="email" name="correo" formControlName="correo" id="correo" placeholder="Correo electrónico">
+                            <span *ngIf="banderaMensaje === false">* Mínimo 5 carácteres, máximo 300</span>
+                            <textarea class="controls" name="mensaje" formControlName="mensaje" id="mensaje" placeholder="Mensaje" cols="30" rows="10"></textarea>
+                            <button class="buton" type="submit" class="btn btn-info"><i class="fas fa-envelope"></i> Enviar mensaje</button>
+                        </form>
+                    </div>
+                    <div>
+                        <h5>¿Donde nos encontramos?</h5>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.5311161511167!2d-79.53707598570671!3d9.015218493530408!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8faca840ffab0135%3A0xd94e9a9ede9c0af4!2sLocal%20el%20dorado!5e0!3m2!1ses!2spa!4v1606268249632!5m2!1ses!2spa"
+                            width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- boton whatsap -->
+    <a href="https://api.whatsapp.com/send?phone=50768086950&text=Hola,%20quisiera%20hacerle%20una%20pregunta" target="_blank"> <i id="botonWhats" class="fab fa-whatsapp"></i></a>
+    <!-- <a href="https://wa.me/62882768?text=Me%20interesa%20el%20auto%20que%20estás%20" target="_blank"> <i id="botonWhats" class="fab fa-whatsapp"></i></a> -->
+    <!-- footer -->
+    <footer>
+        <p><i class="far fa-copyright"></i> grupoautopanamá.com | Todos los derechos reservados - <span>{{anio}}</span>
+        </p>
+        <a href="https://www.instagram.com/grupoautoventaspanama/" target="_blankc"><i id="logoInsta"
+                class="fab fa-instagram"></i></a>
+    </footer>
+</div>
