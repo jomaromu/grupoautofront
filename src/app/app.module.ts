@@ -7,11 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { CorreoService } from './servicios/correo.service';
 import { InicioComponent } from './inicio/inicio/inicio.component';
+import { SliderComponent } from './shared/slider.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InicioComponent
+    InicioComponent,
+    SliderComponent
   ],
   imports: [
     BrowserModule,

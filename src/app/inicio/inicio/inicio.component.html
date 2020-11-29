@@ -3,13 +3,19 @@
     <div class="row" id="filaNav">
         <div class="col-12" id="colNav">
             <div id="logo">
-                <h6>Grupoautopanama.com</h6>
+                <h6>grupoautopanama.com</h6>
             </div>
             <nav id="menuPc">
                 <ul>
-                    <li (click)="desplazarInicio(rowSlider)"><i class="fas fa-home"></i> Inicio |</li>
-                    <li (click)="desplazarSobre(rowSobre)"><i class="fas fa-taxi"></i> Sobre nosotros |</li>
-                    <li (click)="desplazarContacto(rowSlider, rowSobre)"><i class="fas fa-chalkboard-teacher"></i> Contáctenos</li>
+                    <a href="#">
+                        <li><i class="fas fa-home"></i> Inicio |</li>
+                    </a>
+                    <a href="#rowSobre">
+                        <li><i class="fas fa-taxi"></i> Sobre nosotros |</li>
+                    </a>
+                    <a href="#ubicaOficina">
+                        <li><i class="fas fa-chalkboard-teacher"></i> Contáctenos</li>
+                    </a>
                 </ul>
             </nav>
             <!-- menu moviles -->
@@ -21,35 +27,32 @@
             <div class="animate__animated" id="navMovil" #navMovil>
                 <div id="navegarMovil">
                     <ul>
-                        <li (click)="desplazarInicio(rowSlider)"><i class="fas fa-home"></i> Inicio</li>
-                        <li (click)="desplazarSobre(rowSobre)"><i class="fas fa-taxi"></i> Sobre nosotros</li>
-                        <li (click)="desplazarContacto(rowSlider, rowSobre)"><i class="fas fa-chalkboard-teacher"> </i> Contáctenos</li>
+                        <a href="#">
+                            <li (click)="desplazarInicio($event)"><i class="fas fa-home"></i> Inicio</li>
+                        </a>
+                        <a href="#rowSobre">
+                            <li (click)="desplazarSobre($event)"><i class="fas fa-taxi"></i> Sobre nosotros</li>
+                        </a>
+                        <a href="#ubicaOficina">
+                            <li (click)="desplazarContacto($event, $event)"><i class="fas fa-chalkboard-teacher"> </i> Contáctenos</li>
+                        </a>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
     <!-- slider -->
-    <div class="row" id="rowSlider" #rowSlider>
-        <div class="col-12">
-            <div id="sliders" #divSlider>
-                <div *ngFor="let slider of sliders">
-                    <img class="animate__animated animate__fadeIn" [src]="slider.rutaImg" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
+    <app-slider></app-slider>
     <!-- sobre nosotros -->
     <div class="row" id="rowSobre" #rowSobre>
         <div class="col-12" id="colSobre">
             <div class="sm-col-12 md-col-6" id="colTxt">
                 <div id="txtSobre">
                     <h5>Sobre nosotros</h5>
-                    <p>Somos una empresa panameña dedicada a la venta de autos usados de contado y también podemos financiar con el banco que el cliente elija o trabaje. También importamos autos de USA pero solo por pedidos y abono del 50% para iniciar el
-                        trámite.
+                    <p>Somos una empresa panameña, dedicada a la venta de autos usados. Finaciamos con el banco que el cliente elija o trabaje. Importamos autos de <b>U.S.A</b>, por pedidos y con abono del 50% para iniciar el trámite.
                     </p>
-                    <p>Si estas mal con la APC hay bancos que pueden financiar según tu score (puntaje de apc) haz tu consulta al whathsapp sin compromiso</p>
-                    <p>Ofrecemos 6 meses de garantía por la compra de su vehículo.</p>
+                    <p>Si estás mal con la <b>APC</b> hay bancos que pueden financiar según tu <u>score</u><b> (puntaje de APC)</b>. Puede hacer su consulta al WhatsApp sin compromiso.</p>
+                    <p>Ofrecemos <span style="color: rgb(0, 105, 217); font-weight: 800;">6 meses</span> de garantía por la compra de su vehículo.</p>
                 </div>
             </div>
             <div class="md-col-6 lg-col-6 sm-col-12" id="colImg">
@@ -84,7 +87,7 @@
                             <img src="../../../assets/recortadas/lema.jpg" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">Lema</h5>
-                                <p class="card-text">Si no lo tenemos lo conseguimos.</p>
+                                <p class="card-text">"Si no lo tenemos lo conseguimos."</p>
                             </div>
                         </div>
                     </div>
@@ -118,7 +121,7 @@
 
                 </div>
                 <div id="ubicaOficina">
-                    <div>
+                    <div id="contenedorForm" class="md-col-12 sm-col-12 lg-col-6">
                         <form id="formulario" autocomplete="off" [formGroup]="forma" (ngSubmit)="enviarMensaje()">
                             <h3>Envíenos un mensaje</h3>
                             <span *ngIf="banderaNombre === false">* Mínimo 5 carácteres, máximo 100</span>
@@ -130,10 +133,12 @@
                             <button class="buton" type="submit" class="btn btn-info"><i class="fas fa-envelope"></i> Enviar mensaje</button>
                         </form>
                     </div>
-                    <div>
-                        <h5>¿Donde nos encontramos?</h5>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.5311161511167!2d-79.53707598570671!3d9.015218493530408!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8faca840ffab0135%3A0xd94e9a9ede9c0af4!2sLocal%20el%20dorado!5e0!3m2!1ses!2spa!4v1606268249632!5m2!1ses!2spa"
-                            width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                    <div id="contenedorMapa" class="md-col-12 sm-col-12 lg-col-6">
+                        <h5>¿Dónde nos encontramos?</h5>
+                        <div id="divMapa">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.5311161511167!2d-79.53707598570671!3d9.015218493530408!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8faca840ffab0135%3A0xd94e9a9ede9c0af4!2sLocal%20el%20dorado!5e0!3m2!1ses!2spa!4v1606268249632!5m2!1ses!2spa"
+                                frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -144,9 +149,14 @@
     <!-- <a href="https://wa.me/62882768?text=Me%20interesa%20el%20auto%20que%20estás%20" target="_blank"> <i id="botonWhats" class="fab fa-whatsapp"></i></a> -->
     <!-- footer -->
     <footer>
-        <p><i class="far fa-copyright"></i> grupoautopanamá.com | Todos los derechos reservados - <span>{{anio}}</span>
-        </p>
+        <p><span><i class="far fa-copyright"></i> grupoautopanama.com |</span> <span>Todos los derechos reservados -</span> <span>{{anio}}</span></p>
         <a href="https://www.instagram.com/grupoautoventaspanama/" target="_blankc"><i id="logoInsta"
                 class="fab fa-instagram"></i></a>
     </footer>
+    <div id="loading" #loadgin style="display: none;">
+        <div class="spinner">
+            <div class="cube1"></div>
+            <div class="cube2"></div>
+        </div>
+    </div>
 </div>

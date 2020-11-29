@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CorreoService } from '../../servicios/correo.service';
 
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-inicio',
   templateUrl: './inicio.component.html',
@@ -13,8 +15,9 @@ export class InicioComponent implements OnInit {
   @ViewChild('menuMoviles', {static:  true}) menuMoviles: ElementRef<HTMLElement>;
   @ViewChild('navMovil', {static:  true}) navMovil: ElementRef<HTMLElement>;
   @ViewChild('divSlider', {static:  true}) divSliders: ElementRef<HTMLElement>;
-  // @ViewChild('descSlider', {static:  true}) descSlider: ElementRef<HTMLElement>;
+  @ViewChild('loadgin', {static:  true}) loadgin: ElementRef<HTMLElement>;
   bandera = true;
+  banderaLoader = false;
   sliders: any[];
   contadorSlider = 0;
   anio: any;
@@ -39,8 +42,8 @@ export class InicioComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.cargarSliders();
-    this.animacionSlider();
+    // this.cargarSliders();
+    // this.animacionSlider();
     this.crearFormulario();
 
     const date = new Date();
@@ -70,84 +73,6 @@ export class InicioComponent implements OnInit {
     }
   }
 
-  cargarSliders(): any {
-    const slider = [];
-
-    const rutaImg1 = '../../../assets/recortadas/car1.jpg';
-    const rutaImg2 = '../../../assets/recortadas/car2.jpg';
-    const rutaImg3 = '../../../assets/recortadas/car3.jpg';
-
-    for (let i = 0; i < 3; i++) {
-
-      const objetoSlider = {
-        rutaImg: null,
-        titulo: null,
-        texto: null,
-      };
-
-      switch (i) {
-        case 0:
-          objetoSlider.rutaImg = rutaImg1;
-          objetoSlider.titulo = 'Titulo 1';
-          objetoSlider.texto = 'Texto de ejemplo 1';
-          slider.push(objetoSlider);
-          break;
-        case 1:
-          objetoSlider.rutaImg = rutaImg2;
-          objetoSlider.titulo = 'Titulo 2';
-          objetoSlider.texto = 'Texto de ejemplo 2';
-          slider.push(objetoSlider);
-          break;
-        case 2:
-          objetoSlider.rutaImg = rutaImg3;
-          objetoSlider.titulo = 'Titulo 3';
-          objetoSlider.texto = 'Texto de ejemplo 3';
-          slider.push(objetoSlider);
-          break;
-      }
-    }
-
-    this.sliders = slider;
-    // console.log(this.sliders);
-  }
-
-  animacionSlider(): any {
-
-    let backUpSlider = [];
-    const sliderIndividual = [];
-    const divSliders = this.divSliders.nativeElement;
-    // const descSlider = this.descSlider.nativeElement;
-    let intervalo;
-
-    intervalo = setInterval(() => {
-      backUpSlider = this.sliders.splice(0, 1);
-      sliderIndividual.push(backUpSlider[0]);
-
-      if (sliderIndividual.length >= 3) {
-        this.sliders = [];
-        this.sliders = sliderIndividual;
-        // clearInterval(intervalo);
-      }
-    }, 5000);
-
-    divSliders.addEventListener('mouseover', (e) => {
-      clearInterval(intervalo);
-    }, false);
-
-    divSliders.addEventListener('mouseleave', (e) => {
-      intervalo = setInterval(() => {
-        backUpSlider = this.sliders.splice(0, 1);
-        sliderIndividual.push(backUpSlider[0]);
-
-        if (sliderIndividual.length >= 3) {
-          this.sliders = [];
-          this.sliders = sliderIndividual;
-          // clearInterval(intervalo);
-        }
-      }, 5000);
-    }, false);
-  }
-
   enviarMensaje(): any {
     // console.log(this.forma)
     const nombre = this.forma.controls.nombre.status;
@@ -171,7 +96,7 @@ export class InicioComponent implements OnInit {
       // caso mensaje
       if (mensaje === 'INVALID') {
         this.banderaMensaje = false;
-      } else {;
+      } else {
         this.banderaMensaje = true;
       }
     } else if (this.forma.status === 'VALID') {
@@ -185,14 +110,46 @@ export class InicioComponent implements OnInit {
       data.append('correo', email);
       data.append('mensaje', message);
 
+      const anchoDiv = window.innerHeight;
+      const offSet = window.scrollY;
+      const body = document.body;
+
+      body.style.overflowY = 'hidden';
+
+      // loading
+      const loader = this.loadgin.nativeElement;
+      loader.style.position = 'absolute';
+      loader.style.backgroundColor = 'rgba(226, 226, 226, 0.3)';
+      loader.style.width = '100%';
+      loader.style.height = `${anchoDiv}px`;
+      loader.style.top = `${offSet}px`;
+      loader.style.display = 'flex';
+      loader.style.justifyContent = 'center';
+      loader.style.alignItems = 'center';
+
       this.correoService.enviarCorreo(data).subscribe((resp: any) => {
-        console.log(resp);
+        if (resp.ok === true) {
+          loader.style.display = 'none';
+          body.style.overflow = 'auto';
+          Swal.fire(
+            'Mensaje',
+            'Correo enviado, muy pronto te contactaremos',
+            'info'
+          );
+          this.forma.reset();
+        } else {
+          loader.style.display = 'none';
+          Swal.fire(
+            'Mensaje',
+            'No se pudo enviar el correo, intentelo más tarde',
+            'error'
+          );
+        }
       });
     }
   }
 
   desplazarInicio(elemento: HTMLHtmlElement): any {
-
     window.scrollTo(0, 0);
   }
 

@@ -1,0 +1,35 @@
+* {
+    /* border: 1px solid black; */
+}
+
+#contenedorPrincipal {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+    /* border-right: 50px solid transparent;
+    border-top: 50px solid transparent; */
+    border-left: 10px solid rgb(209, 236, 241);
+    border-bottom: 10px solid rgb(209, 236, 241);
+    background-color: rgba(209, 236, 241, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* width: 100%; */
+}
+
+#slider {
+    padding: 0px;
+    /* width: 100%; */
+}
+
+#carouselExampleIndicators {
+    box-shadow: 3px 3px 5px rgb(143, 143, 143);
+    border-radius: 8px;
+}
+
+img {
+    border-radius: 8px;
+}
