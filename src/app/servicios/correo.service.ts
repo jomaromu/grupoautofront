@@ -14,7 +14,8 @@ export class CorreoService {
 
   enviarCorreo(data): Observable<any> {
 
-    const url = 'https://grupoautopanama.com:3000';
+    const url = 'http://3.139.64.158:3000';
+    // const url = 'https://localhost:3000';
     return this.http.post(url, data )
       .pipe(
         map((resp: any) => {
